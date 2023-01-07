@@ -1,8 +1,15 @@
 import API from "./conf";
 
-export default class Register extends API {
+export default class RegisterData extends API {
 
-    send() {
-        console.log(this.request('POST', {}))
+    send(endpoint: string) {
+        switch(endpoint) {
+            case 'edit':
+                this.request('test', 'POST', {})
+                break;
+            case 'update':
+                this.request('update', 'POST', {})
+                break;
+        }
     }
 }
