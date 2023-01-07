@@ -6,12 +6,12 @@ import {
   RouterProvider,
   Link,
 } from "react-router-dom";
+import Dashboard from "../pages/Dashboard";
 
-const logged = true
 const Logged: Object[] = [
   {
     path: "dashboard",
-    element: <div>Dashboard</div>,
+    element: <Dashboard/>,
   },
 ]
 export default Logged;
