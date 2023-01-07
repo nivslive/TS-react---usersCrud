@@ -1,25 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Routes from './router/Router';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import AuthProvider from './context/AuthContext';
+import { ChakraProvider } from '@chakra-ui/react';
 
+const test = () => {
+  console.log(Routes)
+}
+const router = createBrowserRouter(Routes);
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   );
 }
 

@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "backup/contexts", "backup/routes"  ]
 }
