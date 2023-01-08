@@ -9,13 +9,17 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    Button,
   } from '@chakra-ui/react'
 import DashboardData from '../API/Dashboard';
 
 const Dashboard: React.FC = () => {
     const [data, setData] = useState<any>([]);
+    const dashboard = new DashboardData
+    const showUser: any  = async (id: any) => {
+        await dashboard.send('show', {'id': id})    
+    }
     useEffect(() => {
-       const dashboard = new DashboardData
         async function fetchingData() { 
             if(data.length !== 0) return
             setData(await dashboard.send('index'))
@@ -38,6 +42,7 @@ const Dashboard: React.FC = () => {
                     <Tr>
                         <Td>{d.email}</Td>
                         <Td>{d.name}</Td>
+                        <Td><Button onClick={() => showUser(d.id)}>a</Button></Td>
                     </Tr>
                 )})}
                 </Tbody>
@@ -45,7 +50,6 @@ const Dashboard: React.FC = () => {
                 <Tr>
                     <Th>To convert</Th>
                     <Th>into</Th>
-                    <Th isNumeric>multiply by</Th>
                 </Tr>
                 </Tfoot>
             </Table>

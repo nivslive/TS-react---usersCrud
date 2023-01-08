@@ -6,6 +6,8 @@ export default class DashboardData extends API {
         switch(endpoint) {
             case 'index':
                 return await this.request('test', 'GET', params)
+            case 'show':
+                return await this.request('show', 'POST', params)
         }
     }
 }

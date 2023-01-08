@@ -29,8 +29,18 @@ export default class API {
                 if(data.authorization !== undefined) 
                     localStorage.setItem('user_token', data.authorization.token);
                 if(redirect !== null) 
-                    window.location.pathname = redirect
+                    this.privileges(Number(data.user.privilege), redirect)
                 return data
             });
+    }
+    privileges(data: number, redirect: string | null) {
+        switch(data) {
+            case 0:
+                window.location.pathname = '/error'
+                break;
+            case 1:
+                window.location.pathname =  redirect !== null ? redirect : '/'
+                break;
+        }
     }
 }

@@ -2,11 +2,10 @@ import API from "./conf";
 
 export default class LoginData extends API {
 
-    send(endpoint: string, params: Object = {}, redirect: string = '/') {
+    async send(endpoint: string, params: Object = {}, redirect: string = '/') {
         switch(endpoint) {
             case 'login':
-                this.request('login', 'POST', params, 'dashboard')
-                break;
+                return await this.request('login', 'POST', params, 'dashboard')
             case 'edit':
                 this.request('test', 'POST', {}, redirect)
                 break;
