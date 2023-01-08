@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "backup/contexts", "backup/routes"  ]
+, "backup/contexts", "backup/routes", "src/API/Conf.ts"  ]
 }

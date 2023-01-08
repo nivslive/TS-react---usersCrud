@@ -9,9 +9,10 @@ import {
     Heading,
     Button,
   } from '@chakra-ui/react'
-import React, { SetStateAction, useState } from 'react'
+import React, { SetStateAction, useContext, useState } from 'react'
 import LoginData from '../API/Login';
 import RegisterData from '../API/Register';
+import { AuthContext } from '../context/AuthContext';
 
 interface formProp {
   title: string,

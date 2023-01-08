@@ -1,17 +1,13 @@
 import React, {createContext, PropsWithChildren, useState} from 'react'
 
-
 export const AuthContext = createContext({})
 
-
-const AuthProvider = ({children}: PropsWithChildren): React.ReactElement => {
+export const AuthProvider = ({children}: PropsWithChildren): React.ReactElement => {
   const [auth, setAuth] = useState(false)
-  console.log(children, 'children')
+  const [expulsed, setExpulsed] = useState(false)
   return (
-    <AuthContext.Provider value={{auth, setAuth}}>
+    <AuthContext.Provider value={{auth, setAuth, expulsed, setExpulsed}}>
       {children}
     </AuthContext.Provider>
   )
 }
-console.log(AuthProvider, 'uahtprovider')
-export default AuthProvider

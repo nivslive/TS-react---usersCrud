@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Form from '../components/Form'
+import ObserveAuth from '../context/Auth';
 
 export default function Login() {
+    ObserveAuth()
     const [logout, setLogout] = useState<boolean>(false);
     useEffect(() => {
         if(logout) {

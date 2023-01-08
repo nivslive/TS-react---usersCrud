@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Form from '../components/Form';
 import RegisterData from '../API/Register';
+import observeAuth from '../context/Auth';
 const Register: React.FC = () => {
+    observeAuth()
     const [logout, setLogout] = useState<boolean>(false);
     useEffect(() => {
         if(!logout) {
@@ -9,14 +11,11 @@ const Register: React.FC = () => {
            setLogout(true) 
         }
     })
-    const handleSubmit = () => {
-        const r = new RegisterData
-        console.log(r.send('edit', {}))
-    }
+
+
     return (
         <div>
             <Form title="Cadastrar" button="Avançar" register={true}/>
-            <button onClick={handleSubmit}> da</button>
         </div>
     )
 }
