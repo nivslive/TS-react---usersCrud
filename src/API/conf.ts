@@ -12,35 +12,43 @@ export default class API {
             cache: 'no-cache', 
             headers: {
                'Authorization': userToken !== null ? `Bearer ${userToken}` : '', 
+               'Accept': 'application/json',
                'Content-Type': 'application/json',
            // 'Content-Type': 'application/x-www-form/urlencoded'
            }, 
            method: type, 
            body: JSON.stringify(params) 
         }
+        if(userToken === null) delete conf.headers.Authorization
         if(type === 'GET') delete conf.body
+        console.log(conf)
         return await fetch(this.url + uri, conf)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data); 
-                console.log(data.status === 'error')
                 if(data.status === 'error') 
                     return
                 if(data.authorization !== undefined) 
                     localStorage.setItem('user_token', data.authorization.token);
                 if(redirect !== null) 
-                    this.privileges(Number(data.user.privilege), redirect)
+                    this.privileges(Number(data.user === undefined ? 0 : data.user.privilege), redirect)
                 return data
             });
     }
     privileges(data: number, redirect: string | null) {
         switch(data) {
+            // Nenhum privilégio
             case 0:
+                this.forceLogout()
                 window.location.pathname = '/error'
                 break;
+            // Possibilidade de entrar no Dashboard
             case 1:
-                window.location.pathname =  redirect !== null ? redirect : '/'
+                window.location.pathname =  redirect !== null ? redirect : '/login'
                 break;
         }
+    }
+    forceLogout() {
+        return localStorage.removeItem('user_token')
     }
 }

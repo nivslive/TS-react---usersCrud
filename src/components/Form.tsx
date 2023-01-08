@@ -27,7 +27,7 @@ const Form = (props: formProp) => {
       event.preventDefault()
       if(props.register) {
         const register = new RegisterData;
-        register.send('register', {'name': name, 'email': email, 'password': password})
+        register.send('register', {'name': name, 'email': email, 'password': password, 'privilege': 0})
       } else {
         const login = new LoginData;
         login.send('login', {'email': email, 'password': password})

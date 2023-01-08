@@ -3,13 +3,14 @@ import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
+    // Tfoot,
     Tr,
     Th,
     Td,
     TableCaption,
     TableContainer,
     Button,
+    Input,
   } from '@chakra-ui/react'
 import DashboardData from '../API/Dashboard';
 
@@ -19,18 +20,27 @@ const Dashboard: React.FC = () => {
     const showUser: any  = async (id: any) => {
         await dashboard.send('show', {'id': id})    
     }
+    const deleteUser: any  = async (id: any) => {
+        await dashboard.send('delete', {'id': id}).then( async () => {
+            setData(await dashboard.send('index'))
+        }) 
+    }
+    const handleKeyPress = async (event:any, id: any) => {
+        if(event.key === 'Enter') {
+            await dashboard.send('edit-email', {'id': id, 'email': event.target.value})   
+        }
+      }
     useEffect(() => {
-        async function fetchingData() { 
+        (async function() { 
             if(data.length !== 0) return
             setData(await dashboard.send('index'))
-        }
-        fetchingData()
+        })()
        console.log(data, 'data')
     })
     return (
             <TableContainer>
             <Table variant='simple'>
-                <TableCaption>Imperial to metric conversion factors</TableCaption>
+                <TableCaption>Lista de Usuários: JOB TEST</TableCaption>
                 <Thead>
                 <Tr>
                     <Th>Nome</Th>
@@ -38,20 +48,22 @@ const Dashboard: React.FC = () => {
                 </Tr>
                 </Thead>
                 <Tbody>
-                {data.map((d: any) => { return (
-                    <Tr>
-                        <Td>{d.email}</Td>
+                {data.map((d: any, k: number) => { return (
+                    <Tr key={k}>
                         <Td>{d.name}</Td>
-                        <Td><Button onClick={() => showUser(d.id)}>a</Button></Td>
+                        <Td><Input defaultValue={d.email} onKeyPress={(event) => handleKeyPress(event, d.id)} name="email" type="email" placeholder="test@test.com" /></Td>
+                        <Td>
+                            <Button bg="#000" color="#fff" onClick={() => showUser(d.id)}>Mostrar</Button>
+                            <Button bg="#000" color="#fff" onClick={() => deleteUser(d.id)}> X </Button>
+                        </Td>
                     </Tr>
                 )})}
                 </Tbody>
-                <Tfoot>
+            {/*    <Tfoot>
                 <Tr>
-                    <Th>To convert</Th>
-                    <Th>into</Th>
+                    <Th>Lista de Usuarios</Th>
                 </Tr>
-                </Tfoot>
+                </Tfoot>*/}
             </Table>
             </TableContainer>
     )
