@@ -10,6 +10,7 @@ import {
     Button,
   } from '@chakra-ui/react'
 import React, { SetStateAction, useState } from 'react'
+import LoginData from '../API/Login';
 import RegisterData from '../API/Register';
 
 interface formProp {
@@ -27,7 +28,10 @@ const Form = (props: formProp) => {
       if(props.register) {
         const register = new RegisterData;
         register.send('register', {'name': name, 'email': email, 'password': password})
-      } 
+      } else {
+        const login = new LoginData;
+        login.send('login', {'email': email, 'password': password})
+      }
       console.log(email, 'email')
       console.log(password, 'event')
       console.log(name, 'name')

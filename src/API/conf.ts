@@ -4,18 +4,33 @@ export default class API {
     constructor() {
         this.url = 'http://127.0.0.1/api/'
     }
-    async request(uri: string, type: string, params: Object, redirect: string): Promise<any>{
-        return await fetch(this.url + uri,  {
-             mode: 'cors', 
-             cache: 'no-cache', 
-             headers: {
-                'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form/urlencoded'
-            }, 
-            method: type, 
-            body: JSON.stringify(params) 
-        })
+    async request(uri: string, type: string, params: Object, redirect: string | null = null ): Promise<any>{
+        const userToken = localStorage.getItem('user_token');
+        
+        const conf: any =  {
+            mode: 'cors', 
+            cache: 'no-cache', 
+            headers: {
+               'Authorization': userToken !== null ? `Bearer ${userToken}` : '', 
+               'Content-Type': 'application/json',
+           // 'Content-Type': 'application/x-www-form/urlencoded'
+           }, 
+           method: type, 
+           body: JSON.stringify(params) 
+        }
+        if(type === 'GET') delete conf.body
+        return await fetch(this.url + uri, conf)
             .then((response) => response.json())
-            .then((data) => {console.log(data); window.location.pathname = redirect});
+            .then((data) => {
+                console.log(data); 
+                console.log(data.status === 'error')
+                if(data.status === 'error') 
+                    return
+                if(data.authorization !== undefined) 
+                    localStorage.setItem('user_token', data.authorization.token);
+                if(redirect !== null) 
+                    window.location.pathname = redirect
+                return data
+            });
     }
 }

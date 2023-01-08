@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Table,
     Thead,
@@ -10,35 +10,36 @@ import {
     TableCaption,
     TableContainer,
   } from '@chakra-ui/react'
+import DashboardData from '../API/Dashboard';
 
 const Dashboard: React.FC = () => {
+    const [data, setData] = useState<any>([]);
+    useEffect(() => {
+       const dashboard = new DashboardData
+        async function fetchingData() { 
+            if(data.length !== 0) return
+            setData(await dashboard.send('index'))
+        }
+        fetchingData()
+       console.log(data, 'data')
+    })
     return (
             <TableContainer>
             <Table variant='simple'>
                 <TableCaption>Imperial to metric conversion factors</TableCaption>
                 <Thead>
                 <Tr>
-                    <Th>To convert</Th>
-                    <Th>into</Th>
-                    <Th isNumeric>multiply by</Th>
+                    <Th>Nome</Th>
+                    <Th>Email</Th>
                 </Tr>
                 </Thead>
                 <Tbody>
-                <Tr>
-                    <Td>inches</Td>
-                    <Td>millimetres (mm)</Td>
-                    <Td isNumeric>25.4</Td>
-                </Tr>
-                <Tr>
-                    <Td>feet</Td>
-                    <Td>centimetres (cm)</Td>
-                    <Td isNumeric>30.48</Td>
-                </Tr>
-                <Tr>
-                    <Td>yards</Td>
-                    <Td>metres (m)</Td>
-                    <Td isNumeric>0.91444</Td>
-                </Tr>
+                {data.map((d: any) => { return (
+                    <Tr>
+                        <Td>{d.email}</Td>
+                        <Td>{d.name}</Td>
+                    </Tr>
+                )})}
                 </Tbody>
                 <Tfoot>
                 <Tr>
