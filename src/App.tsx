@@ -11,9 +11,11 @@ const test = () => {
 const router = createBrowserRouter(Routes);
 function App() {
   return (
+    <AuthProvider>
     <ChakraProvider>
       <RouterProvider router={router} />
     </ChakraProvider>
+    </AuthProvider>
   );
 }
 

@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
     })
     return (
             <TableContainer>
-            <Table variant='simple'>
+            <Table variant='simple' size='sm'>
                 <TableCaption>Lista de Usuários: JOB TEST</TableCaption>
                 <Thead>
                 <Tr>
