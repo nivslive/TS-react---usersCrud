@@ -11,6 +11,7 @@ import {
     TableContainer,
     Button,
     Input,
+    Select,
   } from '@chakra-ui/react'
 import DashboardData from '../API/Dashboard';
 
@@ -45,6 +46,8 @@ const Dashboard: React.FC = () => {
                 <Tr>
                     <Th>Nome</Th>
                     <Th>Email</Th>
+                    <Th>Privilégio</Th>
+                    <Th>Opções</Th>
                 </Tr>
                 </Thead>
                 <Tbody>
@@ -52,6 +55,11 @@ const Dashboard: React.FC = () => {
                     <Tr key={k}>
                         <Td>{d.name}</Td>
                         <Td><Input defaultValue={d.email} onKeyPress={(event) => handleKeyPress(event, d.id)} name="email" type="email" placeholder="test@test.com" /></Td>
+                        <Td> <Select>
+                                <option value='0' selected={d.privilege === 0 ? true : false}>Convidado</option>
+                                <option value='1' selected={d.privilege === 0 ? false : true }>Admin</option>
+                            </Select>
+                        </Td>
                         <Td>
                             <Button bg="#000" color="#fff" onClick={() => showUser(d.id)}>Mostrar</Button>
                             <Button bg="#000" color="#fff" onClick={() => deleteUser(d.id)}> X </Button>
