@@ -31,7 +31,7 @@ export default class API {
                 if(data.authorization !== undefined) 
                     localStorage.setItem('user_token', data.authorization.token);
                 if(redirect !== null) 
-                    this.privileges(Number(data.user === undefined ? 0 : data.user.privilege), redirect)
+                    this.privileges(Number(data.user.privilege === undefined ? 2 : data.user.privilege), redirect)
                 return data
             });
     }
@@ -45,6 +45,9 @@ export default class API {
             // Possibilidade de entrar no Dashboard
             case 1:
                 window.location.pathname =  redirect !== null ? redirect : '/login'
+                break;
+            case 2:
+                window.location.pathname =  '/login'
                 break;
         }
     }

@@ -20,9 +20,17 @@ const index = {
             </div>
     )
   }
+const errors = {
+  path: "/error",
+  element: (
+      <div>
+          <div> Erro. Não existe essa página. Sai fora irmão.</div>
+      </div>
+  ),
+}
 
 const Public: Object[] = [
-  index,
+  index, errors,
   {
     path: "login",
     element: <Login />,
