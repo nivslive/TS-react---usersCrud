@@ -2,7 +2,7 @@ import API from "./conf";
 
 export default class Register extends API {
 
-    send(endpoint: string) {
+    send(endpoint: string, params: Object = {}) {
         switch(endpoint) {
             case 'edit':
                 this.request('test', 'POST', {})

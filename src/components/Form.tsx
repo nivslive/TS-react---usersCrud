@@ -10,19 +10,27 @@ import {
     Button,
   } from '@chakra-ui/react'
 import React, { SetStateAction, useState } from 'react'
+import RegisterData from '../API/Register';
 
 interface formProp {
   title: string,
   button: string,
+  register: boolean
 }
 
 const Form = (props: formProp) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [name, setName] = useState<string>('');
     const handleSubmit: any = (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
+      if(props.register) {
+        const register = new RegisterData;
+        register.send('register', {'name': name, 'email': email, 'password': password})
+      } 
       console.log(email, 'email')
       console.log(password, 'event')
+      console.log(name, 'name')
     }
     return (
         <Flex width="full" align="center" justifyContent="center">
@@ -40,6 +48,12 @@ const Form = (props: formProp) => {
                 <FormLabel>Password</FormLabel>
                 <Input onChange={e => setPassword(String(e.target.value))} name="password" type="password" placeholder="*******" />
               </FormControl>
+              { props.register && (
+                <FormControl mt={6}>
+                <FormLabel>Nome</FormLabel>
+                <Input onChange={e => setName(String(e.target.value))} name="name" type="name" placeholder="name" />
+              </FormControl>
+              )}
               <Button width="full" mt={4} type="submit">
                 { props.button }
               </Button>
