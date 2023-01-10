@@ -30,7 +30,7 @@ class Configuration extends React.Component {
        method: type, 
        body: JSON.stringify(params) 
     }
-    if(userToken === null && forceDeleteBearer) delete conf.headers.Authorization
+    if(userToken === null || forceDeleteBearer) delete conf.headers.Authorization
     if(type === 'GET') delete conf.body
     console.log(conf)
     return await fetch(this.url + uri, conf)

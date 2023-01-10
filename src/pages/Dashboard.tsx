@@ -60,7 +60,8 @@ const Dashboard: React.FC = () => {
                 )
     }
     const handlePrivilege = async (event:any, id:any) =>  {
-        await dashboard.send('edit-privilege', {'id': id, 'privilege': event.target.value}) 
+       notify(`Privilégio do ID ${id} foi atualizado!`)
+       await dashboard.send('edit-privilege', {'id': id, 'privilege': event}) 
     }
     const handleKeyPress = async (event:any, id: any, keyClass: any) => {
         const element = document.querySelector<any>(`.email-${keyClass}`)
@@ -73,7 +74,6 @@ const Dashboard: React.FC = () => {
         }
       }
     useEffect(() => {
-        
         // if(context.auth) {
         //     window.location.pathname = '/login' 
         // }
