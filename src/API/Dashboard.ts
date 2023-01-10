@@ -9,6 +9,8 @@ export default class DashboardData extends Configuration {
                 return await this.request('test', 'GET', params)
             case 'delete':
                 return await this.request('delete', 'DELETE', params)
+            case 'edit-privilege':
+                return await this.request('edit-privilege', 'POST', params)
             case 'edit-email':
                 return await this.request('edit-email', 'POST', params)
         }
