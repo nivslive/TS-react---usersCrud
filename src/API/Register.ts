@@ -2,13 +2,13 @@ import ObserveAuth from "../context/Auth";
 import { AuthContext } from "../context/AuthContext";
 import React from "react";
 import Configuration from "./Conf";
-import AuthForm from "../context/Test";
+//import AuthForm from "../context/Test";
 
-export default class RegisterData extends AuthForm {
+export default class RegisterData extends Configuration {
     send(endpoint: string, params: Object = {}, redirect: string = '/') {
         switch(endpoint) {
             case 'register-dashboard':
-                return this.request('register', 'POST', params, 'dashboard');
+                return this.request('register', 'POST', params, 'dashboard', true);
             case 'register':
                 this.request('register', 'POST', params, 'login')
                 break;

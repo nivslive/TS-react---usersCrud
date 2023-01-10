@@ -1,7 +1,7 @@
-import AuthForm from "../context/Test";
+//import AuthForm from "../context/Test";
 import Configuration from "./Conf";
 
-export default class DashboardData extends AuthForm {
+export default class DashboardData extends Configuration {
 
     async send(endpoint: string, params: Object = {}, redirect: string = '/') {
         switch(endpoint) {

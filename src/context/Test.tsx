@@ -65,7 +65,7 @@ forceLogout() {
     return localStorage.removeItem('user_token')
 }
   render() {
-    return <div>Some code</div>;
+    return <></>;
   }
 }
 
