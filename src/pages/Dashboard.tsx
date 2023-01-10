@@ -118,12 +118,12 @@ const Dashboard: React.FC = () => {
                         </Tr>
                     )})}
                     </Tbody>    
-                            <Tfoot bg="#000"  p="3" width='100%' display='flex' alignItems='center' flexDirection='row' m='auto'>
-                                <Input m="3" name="name" type="name" placeholder="Digite seu nome" onChange={(e) => {setNewUserName(e.target.value)}} />
-                                <Input m="3" name="email" type="email" placeholder="email@email.com"onChange={(e) => {setNewUserEmail(e.target.value)}} />
-                                <Input m="3" name="password" type="password" placeholder="*******" onChange={(e) => {setNewUserPassword(e.target.value)}} />
-                                <Button m="3" bg="#fff" color="#000" onClick={handleNewUser}>Criar</Button>
-                            </Tfoot>
+                    <Tfoot bg="#000"  p="3" width='100%' display='flex' alignItems='center' flexDirection='row' m='auto'>
+                        <Input m="3" name="name" type="name" placeholder="Digite seu nome" onChange={(e) => {setNewUserName(e.target.value)}} />
+                        <Input m="3" name="email" type="email" placeholder="email@email.com"onChange={(e) => {setNewUserEmail(e.target.value)}} />
+                        <Input m="3" name="password" type="password" placeholder="*******" onChange={(e) => {setNewUserPassword(e.target.value)}} />
+                        <Button m="3" bg="#fff" color="#000" onClick={handleNewUser}>Criar</Button>
+                    </Tfoot>
 
                 </Table>
             </TableContainer>
