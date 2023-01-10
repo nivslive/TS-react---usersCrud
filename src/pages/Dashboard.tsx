@@ -15,11 +15,13 @@ import {
   } from '@chakra-ui/react'
 import DashboardData from '../API/Dashboard';
 import ObserveAuth from '../context/Auth';
+import RegisterData from '../API/Register';
 
 const Dashboard: React.FC = () => {
     ObserveAuth()
     const [data, setData] = useState<any>([]);
     const dashboard = new DashboardData
+    const user = new RegisterData
     const showUser: any  = async (id: any) => {
         await dashboard.send('show', {'id': id})    
     }
@@ -28,6 +30,19 @@ const Dashboard: React.FC = () => {
             setData(await dashboard.send('index'))
         }) 
     }
+    
+    const [newUserName, setNewUserName] = useState<any>('');
+    const [newUserEmail, setNewUserEmail] = useState<any>('');
+    const [newUserPassword, setNewUserPassword] = useState<any>('');
+    const handleNewUser = async () => {
+        await user.send('register-dashboard', 
+            {'username': newUserName, 'password': newUserPassword, 'email': newUserEmail, 'privilege': 0})
+                .then( async () => {
+                    setData(await dashboard.send('index')
+                )
+        }) 
+    }
+    
     const handleKeyPress = async (event:any, id: any, keyClass: any) => {
         const element = document.querySelector<any>(`.email-${keyClass}`)
         element.style.background = '#d9d9ff'
@@ -81,11 +96,10 @@ const Dashboard: React.FC = () => {
                     </Tr>
                 )})}
                 </Tbody>
-            {/*    <Tfoot>
-                <Tr>
-                    <Th>Lista de Usuarios</Th>
-                </Tr>
-                </Tfoot>*/}
+                            <Input onChange={(e) => {setNewUserName(e.target.value)}} />
+                            <Input onChange={(e) => {setNewUserEmail(e.target.value)}} />
+                            <Input onChange={(e) => {setNewUserPassword(e.target.value)}} />
+                            <Button onClick={handleNewUser}></Button>
             </Table>
             </TableContainer>
     )
