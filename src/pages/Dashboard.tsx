@@ -67,8 +67,9 @@ const Dashboard: React.FC = () => {
         const element = document.querySelector<any>(`.email-${keyClass}`)
         element.style.background = '#d9d9ff'
         console.log(event.key, 'key')
-        notify(`Clique enter.`)
+        if(event.key !== 'Enter') notify(`Clique enter.`)
         if(event.key === 'Enter') {
+            notify(`Dado enviado ao banco.`)
             element.style.background = 'white'
             await dashboard.send('edit-email', {'id': id, 'email': event.target.value})   
         }
