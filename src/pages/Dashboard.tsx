@@ -12,6 +12,7 @@ import {
     Button,
     Input,
     Select,
+    Tfoot,
   } from '@chakra-ui/react'
 import DashboardData from '../API/Dashboard';
 import ObserveAuth from '../context/Auth';
@@ -34,13 +35,15 @@ const Dashboard: React.FC = () => {
     const [newUserName, setNewUserName] = useState<any>('');
     const [newUserEmail, setNewUserEmail] = useState<any>('');
     const [newUserPassword, setNewUserPassword] = useState<any>('');
-    const handleNewUser = async () => {
-        await user.send('register-dashboard', 
-            {'username': newUserName, 'password': newUserPassword, 'email': newUserEmail, 'privilege': 0})
-                .then( async () => {
-                    setData(await dashboard.send('index')
+    const handleNewUser: any = async () => {
+        await user.send
+                ('register-dashboard', {
+                    'username': newUserName, 
+                    'password': newUserPassword, 
+                    'email': newUserEmail, 
+                    'privilege': '0'
+                    }
                 )
-        }) 
     }
     
     const handleKeyPress = async (event:any, id: any, keyClass: any) => {
@@ -95,11 +98,14 @@ const Dashboard: React.FC = () => {
                         </Td>
                     </Tr>
                 )})}
-                </Tbody>
-                            <Input onChange={(e) => {setNewUserName(e.target.value)}} />
-                            <Input onChange={(e) => {setNewUserEmail(e.target.value)}} />
-                            <Input onChange={(e) => {setNewUserPassword(e.target.value)}} />
-                            <Button onClick={handleNewUser}></Button>
+                </Tbody>    
+                            <Tfoot>
+                            <Input name="name" type="name" placeholder="Digite seu nome" onChange={(e) => {setNewUserName(e.target.value)}} />
+                            <Input name="email" type="email" placeholder="email@email.com"onChange={(e) => {setNewUserEmail(e.target.value)}} />
+                            <Input name="password" type="password" placeholder="*******" onChange={(e) => {setNewUserPassword(e.target.value)}} />
+                            <Button onClick={handleNewUser}>Criar</Button>
+                            </Tfoot>
+
             </Table>
             </TableContainer>
     )

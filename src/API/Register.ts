@@ -8,8 +8,7 @@ export default class RegisterData extends AuthForm {
     send(endpoint: string, params: Object = {}, redirect: string = '/') {
         switch(endpoint) {
             case 'register-dashboard':
-                this.request('register', 'POST', params, 'dashboard')
-                break;
+                return this.request('register', 'POST', params, 'dashboard');
             case 'register':
                 this.request('register', 'POST', params, 'login')
                 break;

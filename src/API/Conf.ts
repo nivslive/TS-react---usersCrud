@@ -15,7 +15,7 @@ class Configuration extends React.Component {
     console.log(this.context, 'test')
     // Access the 'setAuth' function here
   }
-  async request(uri: string, type: string, params: Object, redirect: string | null = null ): Promise<any>{
+  async request(uri: string, type: string, params: Object, redirect: string | null = null, forceDeleteBearer: boolean = false ): Promise<any>{
     const userToken = localStorage.getItem('user_token');
     
     const conf: any =  {
@@ -30,7 +30,7 @@ class Configuration extends React.Component {
        method: type, 
        body: JSON.stringify(params) 
     }
-    if(userToken === null) delete conf.headers.Authorization
+    if(userToken === null && forceDeleteBearer) delete conf.headers.Authorization
     if(type === 'GET') delete conf.body
     console.log(conf)
     return await fetch(this.url + uri, conf)
